@@ -1,0 +1,24 @@
+<form 
+  id="order-form"
+  action="/order" 
+  method="POST" 
+  enctype="application/x-www-form-urlencoded">
+
+  <label for="item"> Item: </label>
+  <select name="item" id="item" required>
+    <option value="Chocolate Chip">Chocolate Chip Cookie</option>
+    <option value="Snickerdoodle">Snickerdoodle Cookie</option>
+    <option value="Peanut Butter Cookie">Peanut Butter Cookie</option>
+    <option value="M&M Brownie Cupcake">M&M Brownie Cupcake</option>
+    <option value="9-inch Brownie">9-inch Brownie</option>
+    <option value="9-inch Blondie">9-inch Blondie</option>
+    <option value="9-inch Lemon Cake">9-inch Lemon Cake</option>
+    <option value="Lemon Pound Cake (loaf)">Lemon Pound Cake (loaf)</option>
+  </select>  
+
+  <label for="quantity">Amount:</label>
+  <input name="quantity" type="number" min="0" required placeholder="1000">
+
+  <button id="add-item">Add item</button>
+  <button type="submit">Submit</button>
+</form>

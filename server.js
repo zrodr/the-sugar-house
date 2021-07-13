@@ -10,13 +10,12 @@ const port = process.env.PORT
 require('./db/db')
 
 const indexRouter = require('./routes/index')
-const adminRouter = require('./routes/admin')
 
 const app = express()
 /* allows express to serve static files from a specified directory */
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: false }))
 
 /* setting up and configuring handlebar view engine */
 app.set('view engine', 'hbs')
@@ -32,7 +31,6 @@ app.engine(
 
 /* mounting routers */
 app.use('/', indexRouter)
-app.use('/admin', adminRouter)
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
