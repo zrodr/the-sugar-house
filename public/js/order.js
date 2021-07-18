@@ -1,6 +1,17 @@
 var itemCount = 1;
 const orderform = document.getElementById('order-form')
 const addItem = document.getElementById('add-item')
+const removeItem = document.getElementById('remove-item')
+
+const createDefaultOption = (optionText) => {
+  const defaultOption = document.createElement('option')
+  defaultOption.setAttribute('hidden', '')
+  defaultOption.setAttribute('disabled', '')
+  defaultOption.setAttribute('selected', '')
+  defaultOption.appendChild(document.createTextNode(optionText))
+
+  return defaultOption
+}
 
 const createItemField = (items) => {
   const formGroup = document.createElement('div')
@@ -11,9 +22,11 @@ const createItemField = (items) => {
 
   itemLabel.setAttribute('for', `item-${itemCount}`)
   itemLabel.appendChild(document.createTextNode("Item:"))
+
   select.setAttribute('name', `item-${itemCount}`)
   select.required = true
 
+  select.appendChild(createDefaultOption('Select an item'))
   items.forEach((item) => {
     var option = document.createElement('option')
     option.value = item
@@ -28,21 +41,27 @@ const createItemField = (items) => {
   return formGroup
 }
 
-const createAmountField = () => {
+const createAmountField = (amounts) => {
   const formGroup = document.createElement('div')
   formGroup.setAttribute('class', 'form-group')
 
   const amountLabel = document.createElement('label')
-  const amount = document.createElement('input')
+  const amount = document.createElement('select')
 
   amountLabel.setAttribute('for', `quantity-${itemCount}`)
   amountLabel.appendChild(document.createTextNode("Amount:"))
 
   amount.setAttribute('name', `quantity-${itemCount}`)
-  amount.setAttribute('type', 'number')
-  amount.setAttribute('min', '0')
-  amount.setAttribute('placeholder', '1000')
   amount.required = true
+
+  amount.appendChild(createDefaultOption('1,000 :)'))
+  amounts.forEach((count) => {
+    var option = document.createElement('option')
+    option.value = count
+    option.text = count
+
+    amount.appendChild(option)
+  })
 
   formGroup.appendChild(amountLabel)
   formGroup.appendChild(amount)
@@ -64,9 +83,14 @@ const addFormField = (e) => {
     "Lemon Pound Cake (loaf)"
   ]
 
-  const itemGroup = createItemField(items)
+  const amounts = [
+    "1 (Brownies/Cakes)",
+    "6",
+    "12"
+  ]
 
-  const amountGroup = createAmountField()
+  const itemGroup = createItemField(items)
+  const amountGroup = createAmountField(amounts)
 
   itemCount++;
 
@@ -74,6 +98,27 @@ const addFormField = (e) => {
   orderform.insertBefore(amountGroup, addItem)
 }
 
-if (orderform && addItem) {
+const removeNode = (node) => {
+  while(node.firstChild) {
+    node.removeChild(node.firstChild)
+  }
+
+  orderform.removeChild(node)
+}
+
+const removeFormField = (e) => {
+  e.preventDefault()
+  if(itemCount === 1) return;
+
+  const lastAmount = addItem.previousElementSibling
+  const lastItem = lastAmount.previousElementSibling
+  itemCount--;
+
+  removeNode(lastItem)
+  removeNode(lastAmount)
+}
+
+if (orderform && addItem && removeItem) {
   addItem.onclick = addFormField
+  removeItem.onclick = removeFormField
 }

@@ -1,6 +1,7 @@
 * {
   margin: 0;
-  padding: 0
+  padding: 0;
+  box-sizing: border-box
 }
 
 html, body {
@@ -18,98 +19,7 @@ label, input {
   min-height: 100%
 }
 
-.main-content {
-  display: grid;
-  grid-template-areas: 
-  "nav nav"
-  "products prices"
-  "products prices"
-  "payment order"
-  "payment order";
-}
-
-.header {
-  position: sticky;
-  top: 0px;
-  z-index: 20;
-  background-color: grey;
-  padding: 2rem 0;
-}
-
-.nav-list {
-  display: flex;
-  justify-content: space-around;
-}
-
-.nav-list a {
-  text-decoration: none
-}
-
-.nav-list li {
-  list-style-type: none;
-}
-
-.products {
-  height: 600px;
-}
-
-.prices {
-  height: 600px;
-}
-
-.payment {
-  height: 600px;
-}
-
-.order {
-  height: 600px;
-}
-
-.footer {
-  height: 200px
-}
-
-#order-form {
-  height: auto;
-  display: grid;
-  grid-template-areas: 
-  "form-group form-group"
-  "add-item btn-submit";
-  gap: .5rem;
-
-  justify-items:center;
-
-  background-color: lightgray;
-  margin: 4rem;
-  padding: 1.25rem
-}
-
-.form-group {
-  padding: 1rem 0;
-}
-
-@media screen and (max-width: 1200px) {
-  .main-content {
-    grid-template-areas: 
-    "nav"
-    "products"
-    "prices"
-    "payment"
-    "order";
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .nav-list {
-    
-  }
-
-  #order-form {
-    grid-template-areas: 
-    "form-group"
-    "form-group"
-    "add-item"
-    "btn-submit";
-  }
-
+.btn-submit, .btn {
+  border-radius: 7px;
+  padding: 0.5rem
 }

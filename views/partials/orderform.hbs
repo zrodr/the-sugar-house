@@ -2,6 +2,7 @@
 
   <div class="form-group">
     <label for="item">Item:</label><select name="item" id="item" required>
+      <option hidden disabled selected value>Select an item</option>
       <option value="Chocolate Chip">Chocolate Chip Cookie</option>
       <option value="Snickerdoodle">Snickerdoodle Cookie</option>
       <option value="Peanut Butter Cookie">Peanut Butter Cookie</option>
@@ -14,10 +15,16 @@
   </div>
 
   <div class="form-group">
-    <label for="quantity">Amount:</label><input name="quantity" type="number" min="0" required placeholder="1000">
+    <label for="quantity">Amount:</label>
+    <select name="quantity" id="quantity" required>
+      <option hidden disabled selected value>1000 :)</option>
+      <option value="1">1 (Brownies/Cakes)</option>
+      <option value="6">6</option>
+      <option value="12">12</option>
+    </select>
   </div>
-    
 
-  <button id="add-item">Add item</button>
+  <button class="btn" id="add-item">Add item</button>
+  <button class="btn" id="remove-item">Remove item</button>
   <button class="btn-submit" type="submit">Submit</button>
 </form>

@@ -1,0 +1,43 @@
+#order-form {
+  display: grid;
+  grid-template-areas: 
+  "form-group form-group"
+  "add-item btn-submit";
+  gap: .5rem;
+
+  width: 700px;
+  height: auto;
+
+  border-radius: 7px;
+  box-shadow: 5px 5px 5px #333;
+
+  justify-items:center;
+
+  background-color: white;
+  margin: auto auto;
+  padding: 1.25rem
+}
+
+.form-group {
+  padding: 1rem 0;
+}
+
+.form-group label {
+  padding: 5px
+}
+
+.form-group select {
+  padding: 5px
+}
+
+@media screen and (max-width: 800px) {
+  #order-form {
+    grid-template-areas: 
+    "form-group"
+    "form-group"
+    "add-item"
+    "btn-submit";
+
+    width: 350px
+  }
+}

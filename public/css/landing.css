@@ -1,0 +1,67 @@
+.main-content {
+  display: grid;
+  grid-template-areas: 
+  "nav nav"
+  "products prices"
+  "products prices"
+  "payment order"
+  "payment order";
+}
+
+.header {
+  position: sticky;
+  top: 0px;
+  z-index: 20;
+  background-color: grey;
+  padding: 2rem 0;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-list a {
+  text-decoration: none
+}
+
+.nav-list li {
+  list-style-type: none;
+}
+
+.products {
+  height: 600px;
+}
+
+.prices {
+  height: 600px;
+}
+
+.payment {
+  height: 600px;
+}
+
+.order {
+  height: 600px;
+}
+
+.footer {
+  height: 200px
+}
+
+@media screen and (max-width: 1200px) {
+  .main-content {
+    grid-template-areas: 
+    "nav"
+    "products"
+    "prices"
+    "payment"
+    "order";
+  }
+}
+
+/* @media screen and (max-width: 800px) {
+  .nav-list {
+    
+  }
+} */
