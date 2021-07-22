@@ -1,11 +1,11 @@
 .main-content {
-  display: grid;
+  /* display: grid;
   grid-template-areas: 
   "nav nav"
   "products prices"
   "products prices"
   "payment order"
-  "payment order";
+  "payment order"; */
 }
 
 .header {
@@ -15,7 +15,7 @@
   "logo logo"
   "menu order";
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #7a1f48;
   text-align: center;
 }
@@ -44,19 +44,33 @@
   margin-bottom: 4rem;
   font-weight: 600;
   padding: 1rem;
-  font-size: 16px
+  letter-spacing: 1px;
+}
+
+.menu {
+  background-color: bisque;
+}
+
+.menu .menu-content {
+  display: grid;
+  grid-template-areas: 
+  "products products prices"
+  "products products prices"
+  "products products payment"
+  "products products payment";
+  height: 600px
 }
 
 .products {
-  height: 600px;
+  grid-area: products;
 }
 
 .prices {
-  height: 600px;
+  grid-area: prices
 }
 
 .payment {
-  height: 600px;
+  grid-area: payment
 }
 
 .order {
@@ -68,38 +82,40 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .main-content {
+  /* .main-content {
     grid-template-areas: 
     "nav"
     "products"
     "prices"
     "payment"
     "order";
-  }
+  } */
 }
 
 @media screen and (max-width: 800px) {
   .logo {
     margin-top: 22vh;
     width: 75%;
-    height: 50%
+    height: auto
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 415px) {
   .logo {
     width: 95%;
   }
 
   .menu-link, .order-link {
-    width: 150px
+    width: 150px;
+    font-size: 16px
   }
 }
 
-@media screen and (max-height: 375px) {
+@media screen and (max-height: 414px) {
   .logo {
     margin-top: 0;
-    width: 95%;
+    width: 85%;
+    height: auto;
   }
 
   .header {

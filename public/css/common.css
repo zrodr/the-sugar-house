@@ -5,6 +5,8 @@
 }
 
 html, body {
+  /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
+  font-family: 'Courier New', Courier, monospace;
   font-size: 16px;
   height: 100%;
 }
@@ -13,20 +15,24 @@ label, input {
   display:inline-block
 }
 
+a {
+  text-decoration: none;
+}
+
 .main-container {
   text-align: center;
   min-height: 100%
 }
 
 .btn-submit, .btn {
-  border-radius: 7px;
+  border-radius: 10px;
   padding: 0.5rem
 }
 
 .btn-outline {
   color: #ffc1d6;
   background: none;
-  border: 3px solid #ffc1d6;
+  border: 3px solid #ffc1d6
 }
 
 .btn-outline:hover {
