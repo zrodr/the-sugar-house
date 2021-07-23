@@ -2,7 +2,8 @@
   display: grid;
   grid-template-areas: 
   "form-group form-group"
-  "add-item btn-submit";
+  "add-item remove-item"
+  "btn-submit btn-submit";
   gap: .5rem;
 
   width: 700px;
@@ -16,6 +17,11 @@
   background-color: white;
   margin: auto auto;
   padding: 1.25rem
+}
+
+form .btn-submit {
+  grid-area: btn-submit;
+  width: 80%
 }
 
 .form-group {
@@ -36,6 +42,7 @@
     "form-group"
     "form-group"
     "add-item"
+    "remove-item"
     "btn-submit";
 
     width: 350px

@@ -1,12 +1,12 @@
-.main-content {
-  /* display: grid;
+/* .main-content {
+  display: grid;
   grid-template-areas: 
   "nav nav"
   "products prices"
   "products prices"
   "payment order"
-  "payment order"; */
-}
+  "payment order";
+} */
 
 .header {
   display: grid;
@@ -49,20 +49,40 @@
 
 .menu {
   background-color: bisque;
+  margin: 0 1rem;
+  margin-top: 1rem;
+  padding: 1.5rem 0.375rem;
+  font-family:cursive;
+  font-size: 24px
 }
 
-.menu .menu-content {
+.menu img {
+  width: 144px;
+  height:144px
+}
+
+.menu-content {
   display: grid;
+  justify-content: center;
   grid-template-areas: 
-  "products products prices"
-  "products products prices"
-  "products products payment"
-  "products products payment";
-  height: 600px
+  "cookies cupcakes prices"
+  "cookies payment prices"
+  "nine-inch payment prices"
+  "nine-inch payment prices";
+  padding: 1rem 0;
+  height: 700px
 }
 
-.products {
-  grid-area: products;
+.cookies {
+  grid-area: cookies;
+}
+
+.cupcakes {
+  grid-area: cupcakes;
+}
+
+.nine-inch {
+  grid-area: nine-inch;
 }
 
 .prices {
@@ -108,6 +128,16 @@
   .menu-link, .order-link {
     width: 150px;
     font-size: 16px
+  }
+
+  .menu-content {
+    grid-template-areas: 
+    "cookies"
+    "nine-inch"
+    "cupcakes"
+    "payment"
+    "prices";
+    height: auto
   }
 }
 
