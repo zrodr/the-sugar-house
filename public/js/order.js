@@ -99,7 +99,7 @@ const addFormField = (e) => {
 }
 
 const removeNode = (node) => {
-  while(node.firstChild) {
+  while (node.firstChild) {
     node.removeChild(node.firstChild)
   }
 
@@ -108,7 +108,7 @@ const removeNode = (node) => {
 
 const removeFormField = (e) => {
   e.preventDefault()
-  if(itemCount === 1) return;
+  if (itemCount === 1) return;
 
   const lastAmount = addItem.previousElementSibling
   const lastItem = lastAmount.previousElementSibling
