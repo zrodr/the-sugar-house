@@ -1,20 +1,13 @@
-/* .main-content {
-  display: grid;
-  grid-template-areas: 
-  "nav nav"
-  "products prices"
-  "products prices"
-  "payment order"
-  "payment order";
-} */
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Shadows+Into+Light&display=swap');
 
-.header {
+header {
   display: grid;
   grid-template-areas: 
   "logo logo"
   "logo logo"
   "menu order";
   justify-content: center;
+  gap: 0.375rem;
   min-height: 100vh;
   background-color: #7a1f48;
   text-align: center;
@@ -49,10 +42,11 @@
 
 .menu {
   background-color: bisque;
-  margin: 0 1rem;
+  margin: 0 auto;
+  width: 70vw;
   margin-top: 1rem;
   padding: 1.5rem 0.375rem;
-  font-family:cursive;
+  font-family:'Courgette', cursive;
   font-size: 24px
 }
 
@@ -61,28 +55,56 @@
   height:144px
 }
 
+.menu h3 {
+  font-weight:bolder;
+  font-size: 30px;
+  margin-bottom: 2rem;
+}
+
+.menu-title {
+  margin-bottom: 2rem;
+}
+
+.menu li {
+  margin-top: 1rem
+}
+
 .menu-content {
   display: grid;
   justify-content: center;
+  gap: 2rem;
+  font-family:'Shadows Into Light', cursive;
   grid-template-areas: 
   "cookies cupcakes prices"
   "cookies payment prices"
   "nine-inch payment prices"
   "nine-inch payment prices";
   padding: 1rem 0;
-  height: 700px
+  height: auto
+}
+
+.menu-content .menu-heading {
+  font-weight: 800;
+  font-size: 26px;
+}
+
+.cookies, 
+.nine-inch, 
+.cupcakes,
+.prices {
+  padding: 1rem 0.875rem
 }
 
 .cookies {
-  grid-area: cookies;
-}
-
-.cupcakes {
-  grid-area: cupcakes;
+  grid-area: cookies
 }
 
 .nine-inch {
-  grid-area: nine-inch;
+  grid-area: nine-inch
+}
+
+.cupcakes {
+  grid-area: cupcakes
 }
 
 .prices {
@@ -90,33 +112,31 @@
 }
 
 .payment {
-  grid-area: payment
+  grid-area: payment;
+  padding-top: 4rem;
 }
 
 .order {
   height: 600px;
 }
 
-.footer {
+footer {
   height: 200px
 }
 
 @media screen and (max-width: 1200px) {
-  /* .main-content {
-    grid-template-areas: 
-    "nav"
-    "products"
-    "prices"
-    "payment"
-    "order";
-  } */
+  .logo {
+    width: 50%;
+    margin: auto;
+
+  }
 }
 
 @media screen and (max-width: 800px) {
   .logo {
-    margin-top: 22vh;
-    width: 75%;
-    height: auto
+    margin: auto;
+    width: 500px;
+    height: 390px
   }
 }
 
@@ -143,7 +163,7 @@
 
 @media screen and (max-height: 414px) {
   .logo {
-    margin-top: 0;
+    margin-top: auto;
     width: 85%;
     height: auto;
   }

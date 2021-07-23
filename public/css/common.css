@@ -6,11 +6,10 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 html, body {
-  /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
-  font-family: 'Courier New', Courier, monospace;
   font-size: 16px;
   height: 100%;
 }
@@ -27,7 +26,7 @@ li {
   list-style-type: none;
 }
 
-.main-container {
+.page-container {
   background-color: #7a1f48;
   text-align: center;
   min-height: 100%
