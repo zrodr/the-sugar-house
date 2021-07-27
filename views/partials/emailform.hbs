@@ -1,0 +1,18 @@
+<form id="email-form" action="/order/custom" 
+  method="POST" 
+  enctype="application/x-www-form-urlencoded">
+  <div class="form-group">
+    <label for="from" >From:</label>
+    <input name="from" type="email" placeholder="How can I reach you?" required>
+  </div>
+
+  <div class="form-group">
+    <label for="subject" >Subject:</label>
+    <input name="subject" type="text" placeholder="Subject" required>
+  </div>
+
+  <div class="form-group">
+    <label for="body" >Body:</label>
+    <textarea name="body" id="email-body" cols="30" rows="10" placeholder="What did you have in mind?" required></textarea>
+  </div>
+</form>

@@ -10,6 +10,7 @@ const port = process.env.PORT
 require('./db/db')
 
 const indexRouter = require('./routes/index')
+const orderRouter = require('./routes/placeorder')
 
 const app = express()
 /* allows express to serve static files from a specified directory */
@@ -31,6 +32,7 @@ app.engine(
 
 /* mounting routers */
 app.use('/', indexRouter)
+app.use('/order', orderRouter)
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)

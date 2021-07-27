@@ -1,7 +1,7 @@
 #order-form {
   display: grid;
   grid-template-areas: 
-  "form-group form-group"
+  "item quantity"
   "add-item remove-item"
   "btn-submit btn-submit";
   gap: .5rem;
@@ -19,7 +19,24 @@
   padding: 1.25rem
 }
 
-form .btn-submit {
+#order-form .item {
+  grid-area: item
+}
+
+#order-form .quantity {
+  grid-area: quantity
+}
+
+
+#order-form #add-item {
+  grid-area: add-item
+}
+
+#order-form #remove-item {
+  grid-area: remove-item
+}
+
+#order-form .btn {
   grid-area: btn-submit;
   width: 80%
 }
@@ -39,8 +56,8 @@ form .btn-submit {
 @media screen and (max-width: 800px) {
   #order-form {
     grid-template-areas: 
-    "form-group"
-    "form-group"
+    "item"
+    "quantity"
     "add-item"
     "remove-item"
     "btn-submit";

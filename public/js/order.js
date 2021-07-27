@@ -15,7 +15,7 @@ const createDefaultOption = (optionText) => {
 
 const createItemField = (items) => {
   const formGroup = document.createElement('div')
-  formGroup.setAttribute('class', 'form-group')
+  formGroup.setAttribute('class', 'item form-group')
 
   const itemLabel = document.createElement('label')
   const select = document.createElement('select')
@@ -43,7 +43,7 @@ const createItemField = (items) => {
 
 const createAmountField = (amounts) => {
   const formGroup = document.createElement('div')
-  formGroup.setAttribute('class', 'form-group')
+  formGroup.setAttribute('class', 'quantity form-group')
 
   const amountLabel = document.createElement('label')
   const amount = document.createElement('select')
