@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const helmet = require('helmet')
 const exphbs = require('express-handlebars')
-const connectToDB = require('./db/db')
+const connectToDB = require('./config/db')
 
 require('dotenv').config()
 const port = process.env.PORT

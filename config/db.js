@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const connectToDB = async () => {
+const connectToDB = () => {
   try {
     const URI = process.env.MONGO_LOCAL 
     /* const URI = process.env.MONGO_URI_ATLAS */
