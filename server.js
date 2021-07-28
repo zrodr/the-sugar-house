@@ -3,11 +3,12 @@ const path = require('path')
 const express = require('express')
 const helmet = require('helmet')
 const exphbs = require('express-handlebars')
+const connectToDB = require('./db/db')
 
 require('dotenv').config()
 const port = process.env.PORT
 
-require('./db/db')
+connectToDB()
 
 const indexRouter = require('./routes/index')
 const orderRouter = require('./routes/placeorder')
@@ -17,6 +18,7 @@ const app = express()
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 /* setting up and configuring handlebar view engine */
 app.set('view engine', 'hbs')
@@ -30,7 +32,6 @@ app.engine(
   })
 )
 
-/* mounting routers */
 app.use('/', indexRouter)
 app.use('/order', orderRouter)
 
