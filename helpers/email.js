@@ -4,8 +4,12 @@ const sendEmailNotification = (from, subject, text) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
+      type:'OAuth2',
       user: process.env.TSH_ORDER_EMAIL,
-      pass: process.env.TSH_ORDER_PASS
+      pass: process.env.TSH_ORDER_PASS,
+      clientId: process.env.OAUTH_CLIENT,
+      clientSecret: process.env.OAUTH_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH
     },
     tls: {
       rejectUnauthorized: false
@@ -13,10 +17,9 @@ const sendEmailNotification = (from, subject, text) => {
   })
 
   const mailOptions = {
-    from,
     to: process.env.TSH_EMAIL,
     subject,
-    text
+    text: 'Order from: '.concat(from, '\n', text)
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
