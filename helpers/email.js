@@ -1,15 +1,21 @@
 const nodemailer = require('nodemailer')
+const { google } = require('googleapis')
 
 const sendEmailNotification = (from, subject, text) => {
+  const OAuth2Client = new google.auth.OAuth2(process.env.OAUTH_CLIENT, process.env.OAUTH_SECRET, process.env.OAUTH_REDIRECT)
+  OAuth2Client.setCredentials({ refresh_token: process.env.OAUTH_REFRESH })
+
+  const accessToken = OAuth2Client.getAccessToken() 
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      type:'OAuth2',
+      type: 'OAuth2',
       user: process.env.TSH_ORDER_EMAIL,
-      pass: process.env.TSH_ORDER_PASS,
       clientId: process.env.OAUTH_CLIENT,
       clientSecret: process.env.OAUTH_SECRET,
-      refreshToken: process.env.OAUTH_REFRESH
+      refreshToken: process.env.OAUTH_REFRESH,
+      accessToken
     },
     tls: {
       rejectUnauthorized: false
@@ -23,7 +29,7 @@ const sendEmailNotification = (from, subject, text) => {
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if(err) {
+    if (err) {
       console.log(err)
     }
     else {

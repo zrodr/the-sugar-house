@@ -1,8 +1,10 @@
 <div class="cupcakes">
-  <h4 class="menu-heading">Cupcakes</h4>
+  <h4 class="menu-heading">{{cupcakes.0.type}}</h4>
 
   <ul class="menu-list">
-    <li>M&M Brownie</li>
+    {{#each cupcakes}}
+      <li>{{this.name}}</li>
+    {{/each}}
   </ul>
 
   <p>More coming soon!</p>
