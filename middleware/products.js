@@ -1,28 +1,49 @@
 const Product = require('../models/Product')
 
-const valid = (productList) => {
-  return (!(productList === undefined || productList.length == 0))
-}
+const valid = (productList) => (!(productList === undefined || productList.length == 0))
 
 const getProductByType = async (type) => {
-  const products = await Product.find({type}).lean()
+  let products
+  //no parameter fetches list of all products 
+  if (type === undefined) {
+    products = await Product.find({}).lean()
+  }
+  else {
+    products = await Product.find({ type }).lean()
+  }
+
+  if (!valid(products)) throw new Error('Could not fetch products from DB')
+
   return products
 }
 
-const getAllProducts = async (req, res, next) => {
-  const cookies = await getProductByType('Cookies')
-  const cupcakes = await getProductByType('Cupcakes')
-  const nineInch = await getProductByType('9-inch')
+const getProductList = async (req, res, next) => {
+  try {
+    const products = await getProductByType('')
+    res.locals.products = products
 
-  if (valid(cookies) && valid(cupcakes) && valid(nineInch)) {
-    res.locals.cookies = cookies
-    res.locals.cupcakes = cupcakes
-    res.locals.nineInch = nineInch
     next()
   }
-  else {
-    res.status(500).redirect('/error')
+  catch (err) {
+    next(err)
   }
 }
 
-module.exports = { getAllProducts }
+const getMenuItems = async (req, res, next) => {
+  try {
+    const cookies = await getProductByType('Cookies')
+    const cupcakes = await getProductByType('Cupcakes')
+    const nineInch = await getProductByType('9-inch')
+
+    res.locals.cookies = cookies
+    res.locals.cupcakes = cupcakes
+    res.locals.nineInch = nineInch
+
+    next()
+  }
+  catch (err) {
+    next(err)
+  }
+}
+
+module.exports = { getMenuItems, getProductList }

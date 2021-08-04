@@ -1,5 +1,11 @@
 <main>
   <h1>Order template</h1>
 
+  <ul>
+  {{#each products}}
+    <li>{{this.name}} {{this.type}}</li>
+  {{/each}}
+  </ul>
+
   {{> orderform }}
 </main>

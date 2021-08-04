@@ -16,9 +16,6 @@ const sendEmailNotification = (from, subject, text) => {
       clientSecret: process.env.OAUTH_SECRET,
       refreshToken: process.env.OAUTH_REFRESH,
       accessToken
-    },
-    tls: {
-      rejectUnauthorized: false
     }
   })
 
@@ -30,11 +27,14 @@ const sendEmailNotification = (from, subject, text) => {
 
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
-      console.log(err)
+      console.log('Failed to send email: ', err)
+      throw new Error(err)
     }
     else {
-      console.log('Email sent!')
+      console.log('Email sent: ', info)
     }
+    
+    transporter.close()
   })
 }
 

@@ -1,16 +1,16 @@
 const router = require('express').Router()
-const { getAllProducts } = require('../middleware/products')
+const { getMenuItems, getProductList } = require('../middleware/products')
 
-router.get('/', getAllProducts, (req, res) => {
-  res.render('landing', {cssPath:"/css/landing.css", jsPath:""})
+router.get('/', getMenuItems, (req, res) => {
+  res.render('landing', { cssPath: "/css/landing.css", jsPath: "" })
 })
 
-router.get('/order', (req,res) => {
-  res.render('order', {cssPath:"/css/order.css", jsPath:"/js/order.js"})
+router.get('/order', getProductList, (req, res) => {
+  res.render('order', { cssPath: "/css/order.css", jsPath: "/js/order.js" })
 })
 
 router.get('/error', (req, res) => {
-  res.render('error')
+  res.render('error', { message: "test" })
 })
 
 module.exports = router
