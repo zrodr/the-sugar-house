@@ -1,6 +1,7 @@
 #order-form {
   display: grid;
   grid-template-areas: 
+  "email email"
   "item quantity"
   "add-item remove-item"
   "btn-submit btn-submit";
@@ -9,53 +10,13 @@
   width: 700px;
   height: auto;
 
-  border-radius: 7px;
-  box-shadow: 5px 5px 5px #333;
-
   justify-items:center;
-
-  background-color: white;
-  margin: auto auto;
-  padding: 1.25rem
-}
-
-#order-form .item {
-  grid-area: item
-}
-
-#order-form .quantity {
-  grid-area: quantity
-}
-
-
-#order-form #add-item {
-  grid-area: add-item
-}
-
-#order-form #remove-item {
-  grid-area: remove-item
-}
-
-#order-form .btn {
-  grid-area: btn-submit;
-  width: 80%
-}
-
-.form-group {
-  padding: 1rem 0;
-}
-
-.form-group label {
-  padding: 5px
-}
-
-.form-group select {
-  padding: 5px
 }
 
 @media screen and (max-width: 800px) {
   #order-form {
     grid-template-areas: 
+    "email"
     "item"
     "quantity"
     "add-item"

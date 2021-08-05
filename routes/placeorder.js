@@ -1,18 +1,32 @@
 const router = require('express').Router()
-const sendEmail = require('../helpers/email')
+const { sendEmailNotification } = require('../helpers/email')
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   console.log(req.body)
-  res.status(200).redirect('/')
+
+  // TODO: finish with processing the body and making email readable
+  
+  try {
+    //sendEmailNotification()
+    res.status(200).redirect('/')
+  }
+  catch(err) {
+    next(err)
+  }
 })
 
-router.post('/custom', (req, res) => {
+router.post('/custom', (req, res, next) => {
   console.log(req.body)
   const { from, subject, body } = req.body
 
-  sendEmail(from, subject, body)
+  try {
+    sendEmailNotification(from, subject, body)
+    res.status(200).redirect('/')
+  }
+  catch (err) {
+    next(err)
+  }
 
-  res.status(200).redirect('/')
 })
 
 module.exports = router

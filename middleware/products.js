@@ -1,26 +1,26 @@
-const Product = require('../models/Product')
-
-const valid = (productList) => (!(productList === undefined || productList.length == 0))
-
-const getProductByType = async (type) => {
-  let products
-  //no parameter fetches list of all products 
-  if (type === undefined) {
-    products = await Product.find({}).lean()
-  }
-  else {
-    products = await Product.find({ type }).lean()
-  }
-
-  if (!valid(products)) throw new Error('Could not fetch products from DB')
-
-  return products
-}
+const { getProductByType, getSizesAndPrices } = require('../helpers/getproducts')
 
 const getProductList = async (req, res, next) => {
   try {
-    const products = await getProductByType('')
+    const products = await getProductByType()
     res.locals.products = products
+
+    next()
+  }
+  catch (err) {
+    next(err)
+  }
+}
+
+/*
+* Meant to be called after products are fetched from db. Adds sizing and
+* pricing to response in a presentable format 
+*/
+const processPricing = (req, res, next) => {
+  try {
+    const { sizes, pricing } = getSizesAndPrices(res.locals.products)
+
+    //TODO: Process the string arrays and match sizes to ther price counterpart
 
     next()
   }
@@ -46,4 +46,4 @@ const getMenuItems = async (req, res, next) => {
   }
 }
 
-module.exports = { getMenuItems, getProductList }
+module.exports = { getProductList, processPricing, getMenuItems }
