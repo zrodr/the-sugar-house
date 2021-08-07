@@ -133,6 +133,19 @@ header {
   height: 600px;
 }
 
+.order a {
+  color: #ffc1d6;
+  margin: 2rem
+}
+
+#email-form {
+  width: 550px
+}
+
+#email-form .form-group:last-of-type {
+  border: none
+}
+
 footer {
   height: 200px
 }
@@ -180,6 +193,10 @@ footer .svg-link {
   }
 
   .menu {
+    width: 75vw
+  }
+
+  #email-form {
     width: 75vw
   }
 

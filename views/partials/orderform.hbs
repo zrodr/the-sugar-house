@@ -1,34 +1,44 @@
 <form class="form" id="order-form" action="/order" method="POST" enctype="application/x-www-form-urlencoded">
   <div class="email form-group">
     <label for="email">Email:</label>
-    <input type="email" required placeholder="Your Email">
+    <input type="email" name="email" required placeholder="Your Email">
   </div>
 
-  <div class="item form-group">
-    <label for="item">Item:</label><select name="item" id="item" required>
-      <option hidden disabled selected value>Select an item</option>
-      <option value="Chocolate Chip">Chocolate Chip Cookie</option>
-      <option value="Snickerdoodle">Snickerdoodle Cookie</option>
-      <option value="Peanut Butter Cookie">Peanut Butter Cookie</option>
-      <option value="M&M Brownie Cupcake">M&M Brownie Cupcake</option>
-      <option value="9-inch Brownie">9-inch Brownie</option>
-      <option value="9-inch Blondie">9-inch Blondie</option>
-      <option value="9-inch Lemon Cake">9-inch Lemon Cake</option>
-      <option value="Lemon Pound Cake (loaf)">Lemon Pound Cake (loaf)</option>
-    </select>
+  <div class="item-list">
+    <div class="item form-group">
+      <label for="item">Item:</label><select name="item" id="item" required>
+        <option hidden disabled selected value>Select an item</option>
+        {{!<option value="Chocolate Chip">Chocolate Chip Cookie</option>
+        <option value="Snickerdoodle">Snickerdoodle Cookie</option>
+        <option value="Peanut Butter Cookie">Peanut Butter Cookie</option>
+        <option value="M&M Brownie Cupcake">M&M Brownie Cupcake</option>
+        <option value="9-inch Brownie">9-inch Brownie</option>
+        <option value="9-inch Blondie">9-inch Blondie</option>
+        <option value="9-inch Lemon Cake">9-inch Lemon Cake</option>
+        <option value="Lemon Pound Cake (loaf)">Lemon Pound Cake (loaf)</option> --}}
+        {{#each products}}
+          <option value={{this.name}}>{{this.name}} {{this.type}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="quantity form-group">
+      <label for="quantity">Amount:</label>
+      <select name="quantity" id="quantity" required>
+        <option hidden disabled selected value>1000 :)</option>
+        
+        {{!-- <option value="1">1 (Brownies/Cakes)</option>
+        <option value="6">6</option>
+        <option value="12">12</option> --}}
+      </select>
+    </div>
   </div>
 
-  <div class="quantity form-group">
-    <label for="quantity">Amount:</label>
-    <select name="quantity" id="quantity" required>
-      <option hidden disabled selected value>1000 :)</option>
-      <option value="1">1 (Brownies/Cakes)</option>
-      <option value="6">6</option>
-      <option value="12">12</option>
-    </select>
-  </div>
-
-  <button class="btn" id="add-item">Add item</button>
-  <button class="btn" id="remove-item">Remove item</button>
-  <button class="btn" type="submit">Submit</button>
+  <button class="btn" id="add-item">
+    <img src="/photos/add-circle.svg" alt="Add Item">
+  </button>
+  <button class="btn" id="remove-item">
+    <img src="/photos/remove-circle.svg" alt="Remove Item">
+  </button>
+  <button class="btn" type="submit">Submit Order</button>
 </form>

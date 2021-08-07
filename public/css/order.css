@@ -1,28 +1,62 @@
-#order-form {
-  display: grid;
-  grid-template-areas: 
-  "email email"
-  "item quantity"
-  "add-item remove-item"
-  "btn-submit btn-submit";
-  gap: .5rem;
+.page-container {
+  background-image: url('/photos/tsh-bg-op3.jpg');
+  background-repeat:repeat;
+  padding: 10vw;
+}
 
+.page-container::after {
+  content:"";
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#order-form {
+  position: relative;
+  z-index: 3;
   width: 700px;
   height: auto;
+}
 
-  justify-items:center;
+.item-list {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-areas:
+  "item quantity";
+  gap: 1rem
+}
+
+#order-form button:last-of-type{
+  display: block;
+  margin: 1rem auto;
+  width: 100%
+}
+
+#order-form img {
+  width: 36px;
+  height: 36px
+}
+
+#order-form #add-item,
+#order-form #remove-item {
+  height: min-content;
+  width: 100px;
+  padding: 0;
+  padding-top: 0.375rem;
 }
 
 @media screen and (max-width: 800px) {
   #order-form {
-    grid-template-areas: 
-    "email"
-    "item"
-    "quantity"
-    "add-item"
-    "remove-item"
-    "btn-submit";
-
     width: 350px
+  }
+
+  .item-list {
+    grid-template-areas:
+    "item"
+    "quantity";
+    row-gap: 1rem
   }
 }

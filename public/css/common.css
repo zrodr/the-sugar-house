@@ -17,8 +17,13 @@ html, body {
   height: 100%
 }
 
-label, input {
+input {
   display:inline-block
+}
+
+label {
+  display: block;
+  text-align: start;
 }
 
 a {
@@ -27,6 +32,11 @@ a {
 
 li {
   list-style-type: none
+}
+
+textarea {
+  width: 100%;
+  resize: none;
 }
 
 .page-container {
@@ -38,7 +48,7 @@ li {
 .form {
   background-color: white;
   margin: auto auto;
-  padding: 1.25rem;
+  padding: 2rem;
 
   border-radius: 7px;
   box-shadow: 5px 5px 5px #333
@@ -52,7 +62,7 @@ li {
 .form-group input,
 .form-group select, 
 .form-group label {
-  height: 100%;
+  width: 100%;
   background-color: white;
   border: none;
   padding: 5px

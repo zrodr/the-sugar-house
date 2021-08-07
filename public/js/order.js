@@ -1,5 +1,6 @@
 var itemCount = 1;
 const orderform = document.getElementById('order-form')
+const orderList = document.querySelector('.item-list')
 const addItem = document.getElementById('add-item')
 const removeItem = document.getElementById('remove-item')
 
@@ -94,8 +95,8 @@ const addFormField = (e) => {
 
   itemCount++;
 
-  orderform.insertBefore(itemGroup, addItem)
-  orderform.insertBefore(amountGroup, addItem)
+  orderList.appendChild(itemGroup)
+  orderList.appendChild(amountGroup)
 }
 
 const removeNode = (node) => {
@@ -103,22 +104,22 @@ const removeNode = (node) => {
     node.removeChild(node.firstChild)
   }
 
-  orderform.removeChild(node)
+  orderList.removeChild(node)
 }
 
 const removeFormField = (e) => {
   e.preventDefault()
   if (itemCount === 1) return;
 
-  const lastAmount = addItem.previousElementSibling
-  const lastItem = lastAmount.previousElementSibling
+  const lastAmount = orderList.lastChild
+  const lastItem = lastAmount.previousElementSibling 
   itemCount--;
 
   removeNode(lastItem)
   removeNode(lastAmount)
 }
 
-if (orderform && addItem && removeItem) {
+if (orderform && orderList && addItem && removeItem) {
   addItem.onclick = addFormField
   removeItem.onclick = removeFormField
 }
