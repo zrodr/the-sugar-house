@@ -1,110 +1,31 @@
 var itemCount = 1;
-const orderform = document.getElementById('order-form')
+
 const orderList = document.querySelector('.item-list')
+const firstItem = orderList.querySelector('select[name="item"]')
 const addItem = document.getElementById('add-item')
 const removeItem = document.getElementById('remove-item')
-
-const createDefaultOption = (optionText) => {
-  const defaultOption = document.createElement('option')
-  defaultOption.setAttribute('hidden', '')
-  defaultOption.setAttribute('disabled', '')
-  defaultOption.setAttribute('selected', '')
-  defaultOption.appendChild(document.createTextNode(optionText))
-
-  return defaultOption
-}
-
-const createItemField = (items) => {
-  const formGroup = document.createElement('div')
-  formGroup.setAttribute('class', 'item form-group')
-
-  const itemLabel = document.createElement('label')
-  const select = document.createElement('select')
-
-  itemLabel.setAttribute('for', `item-${itemCount}`)
-  itemLabel.appendChild(document.createTextNode("Item:"))
-
-  select.setAttribute('name', `item-${itemCount}`)
-  select.required = true
-
-  select.appendChild(createDefaultOption('Select an item'))
-  items.forEach((item) => {
-    var option = document.createElement('option')
-    option.value = item
-    option.text = item
-
-    select.appendChild(option)
-  })
-
-  formGroup.appendChild(itemLabel)
-  formGroup.appendChild(select)
-
-  return formGroup
-}
-
-const createAmountField = (amounts) => {
-  const formGroup = document.createElement('div')
-  formGroup.setAttribute('class', 'quantity form-group')
-
-  const amountLabel = document.createElement('label')
-  const amount = document.createElement('select')
-
-  amountLabel.setAttribute('for', `quantity-${itemCount}`)
-  amountLabel.appendChild(document.createTextNode("Amount:"))
-
-  amount.setAttribute('name', `quantity-${itemCount}`)
-  amount.required = true
-
-  amount.appendChild(createDefaultOption('1,000 :)'))
-  amounts.forEach((count) => {
-    var option = document.createElement('option')
-    option.value = count
-    option.text = count
-
-    amount.appendChild(option)
-  })
-
-  formGroup.appendChild(amountLabel)
-  formGroup.appendChild(amount)
-
-  return formGroup
-}
 
 const addFormField = (e) => {
   e.preventDefault()
 
-  const items = [
-    "Chocolate Chip Cookie",
-    "Snickerdoodle Cookie",
-    "Peanut Butter Cookie",
-    "M&M Brownie Cupcake",
-    "9-inch Brownie",
-    "9-inch Blondie",
-    "9-inch Lemon Cake",
-    "Lemon Pound Cake (loaf)"
-  ]
+  /* copy DOM subtrees for input fields. 'for' and 'name' attributes are appended
+     with a numeric constant to maintain uniqueness */
+  const newItem = orderList.firstElementChild.cloneNode(true)
+  const newAmount = orderList.firstElementChild.nextElementSibling.cloneNode(true)
 
-  const amounts = [
-    "1 (Brownies/Cakes)",
-    "6",
-    "12"
-  ]
+  newItem.querySelector('label[for*="item"]').htmlFor = `item-${itemCount}`
+  const itemSelect = newItem.querySelector('select[name*="item"]')
+  itemSelect.name = `item-${itemCount}`
+  itemSelect.onchange = getPricesForItem
 
-  const itemGroup = createItemField(items)
-  const amountGroup = createAmountField(amounts)
+  newAmount.querySelector('label[for*="quantity"]').htmlFor = `quantity-${itemCount}`
+  const amountSelect = newAmount.querySelector('select[name*="quantity"]')
+  amountSelect.name = `quantity-${itemCount}`
 
   itemCount++;
 
-  orderList.appendChild(itemGroup)
-  orderList.appendChild(amountGroup)
-}
-
-const removeNode = (node) => {
-  while (node.firstChild) {
-    node.removeChild(node.firstChild)
-  }
-
-  orderList.removeChild(node)
+  orderList.appendChild(newItem)
+  orderList.appendChild(newAmount)
 }
 
 const removeFormField = (e) => {
@@ -112,14 +33,38 @@ const removeFormField = (e) => {
   if (itemCount === 1) return;
 
   const lastAmount = orderList.lastChild
-  const lastItem = lastAmount.previousElementSibling 
+  const lastItem = lastAmount.previousElementSibling
   itemCount--;
 
   removeNode(lastItem)
   removeNode(lastAmount)
 }
 
-if (orderform && orderList && addItem && removeItem) {
+if (orderList && firstItem && addItem && removeItem) {
+  firstItem.onchange = getPricesForItem
   addItem.onclick = addFormField
   removeItem.onclick = removeFormField
+}
+
+
+/*  helper functions */
+function removeNode(node) {
+  while (node.firstChild) {
+    node.removeChild(node.firstChild)
+  }
+
+  orderList.removeChild(node)
+}
+
+function getPricesForItem(e) {
+  e.preventDefault()
+
+  const itemName = this.value
+  /* grabs the quantity field corresponding to the item select tag */
+  const nextAmount = this.parentElement.nextElementSibling.querySelector('select[name*="quantity"]')
+
+  if (itemName.includes('Cookies')) {
+    console.log(nextAmount.options)
+  }
+  console.log(itemName)
 }
