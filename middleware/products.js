@@ -1,8 +1,10 @@
-const { getProductByType, getSizesAndPrices } = require('../helpers/getproducts')
+const { getProducts, filterByProductType, getSizesAndPrices } = require('../helpers/getproducts')
 
+/* middleware chaining for products must begin here, once the db data is fetched,
+   we can perform additional operations on it */
 const getProductList = async (req, res, next) => {
   try {
-    const products = await getProductByType()
+    const products = await getProducts()
     res.locals.products = products
 
     next()
@@ -18,9 +20,11 @@ const getProductList = async (req, res, next) => {
 */
 const processPricing = (req, res, next) => {
   try {
-    const { sizes, pricing } = getSizesAndPrices(res.locals.products)
+    const { cookieInfo, cupcakeInfo, nineInchInfo } = getSizesAndPrices(res.locals.products)
 
-    //TODO: Process the string arrays and match sizes to ther price counterpart
+    res.locals.cookiePricing = cookieInfo
+    res.locals.cupcakePricing = cupcakeInfo
+    res.locals.nineInchPricing = nineInchInfo
 
     next()
   }
@@ -29,16 +33,18 @@ const processPricing = (req, res, next) => {
   }
 }
 
-const getMenuItems = async (req, res, next) => {
+const filterForMenu = (req, res, next) => {
   try {
-    const cookies = await getProductByType('Cookies')
-    const cupcakes = await getProductByType('Cupcakes')
-    const nineInch = await getProductByType('9-inch')
+    const {cookies,cupcakes,nineInch} = filterByProductType(res.locals.products)
 
     res.locals.cookies = cookies
     res.locals.cupcakes = cupcakes
     res.locals.nineInch = nineInch
 
+    /* clean up after original db query data. Avoids storing full list and 
+       sub-arrays at the same time. */
+    res.locals.products = null
+    
     next()
   }
   catch (err) {
@@ -46,4 +52,4 @@ const getMenuItems = async (req, res, next) => {
   }
 }
 
-module.exports = { getProductList, processPricing, getMenuItems }
+module.exports = { getProductList, processPricing, filterForMenu }

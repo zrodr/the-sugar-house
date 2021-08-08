@@ -7,20 +7,21 @@
       <li>
         <h4 class="menu-heading">Cookies</h4>
       </li>
-      <li>Pack of 6 - $12</li>
-      <li>Pack of 12 - $20</li>
+      {{#each cookiePricing}}
+        <li>Pack of {{this}}</li>
+      {{/each}}
 
       <li>
         <h4 class="menu-heading">Cupcakes</h4>
       </li>
-      <li>Pack of 4 - $10</li>
-      <li>Pack of 6 - $15</li>
-      <li>Pack of 12 - $25</li>
+      {{#each cupcakePricing}}
+        <li>Pack of {{this}}</li>
+      {{/each}}
 
       <li>
         <h4 class="menu-heading">9-inch</h4>
       </li>
-      <li>All items $20</li>
+      <li>$20 per item</li>
 
     </ul>
   </div>

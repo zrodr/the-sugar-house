@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const connectToDB = () => {
   try {
-    const URI = process.env.MONGO_LOCAL 
-    /* const URI = process.env.MONGO_URI_ATLAS */
+    /* const URI = process.env.MONGO_LOCAL */ 
+    const URI = process.env.MONGO_URI_ATLAS
 
     mongoose.connect(URI, { 
       useNewUrlParser: true, 

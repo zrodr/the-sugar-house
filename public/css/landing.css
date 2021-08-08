@@ -130,7 +130,7 @@ header {
 }
 
 .order {
-  height: 600px;
+  height: auto;
 }
 
 .order a {
