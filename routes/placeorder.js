@@ -15,12 +15,12 @@ router.post('/', (req, res, next) => {
   }
 })
 
-router.post('/custom', (req, res, next) => {
+router.post('/custom', async (req, res, next) => {
   console.log(req.body)
   const { from, subject, body } = req.body
 
   try {
-    sendEmailNotification(from, subject, body)
+    await sendEmailNotification(from, subject, body)
     res.status(200).redirect('/')
   }
   catch (err) {

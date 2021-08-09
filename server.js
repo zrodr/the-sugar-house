@@ -35,7 +35,7 @@ app.engine(
 app.use('/', indexRouter)
 app.use('/order', orderRouter)
 app.use((err, req, res, next) => {
-  console.log(err)
+  //console.log(err)
   res.status(500).render('error', { message: err.message })
 })
 

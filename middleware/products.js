@@ -41,6 +41,7 @@ const filterForMenu = (req, res, next) => {
     res.locals.cupcakes = cupcakes
     res.locals.nineInch = nineInch
 
+
     /* clean up after original db query data. Avoids storing full list and 
        sub-arrays at the same time. */
     res.locals.products = null
