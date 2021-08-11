@@ -10,11 +10,11 @@ const ProductSchema = mongoose.Schema({
     required: true
   },
   sizing: {
-    type: String,
+    type: [Number],
     required: true
   },
   pricing: {
-    type: String,
+    type: [Number],
     required: true
   }
 })

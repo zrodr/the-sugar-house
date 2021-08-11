@@ -3,7 +3,7 @@ const Product = require('../models/Product')
 const valid = (productList) => (!(productList === undefined || productList.length == 0))
 
 const getProducts = async () => {
-  const products = await Product.find({}).lean()
+  const products = await Product.find({}).sort({ type: -1 }).lean()
 
   if (!valid(products)) throw new Error('Could not fetch products from DB')
 
@@ -23,17 +23,11 @@ const getSizesAndPrices = (products) => {
   const cupcake = products.find((product) => product.type === 'Cupcakes')
   const nineInch = products.find((product) => product.type === '9-inch')
 
-  const sizesAndPrices = {
-    cookieInfo: [],
-    cupcakeInfo: [],
-    nineInchInfo: []
-  }
+  cookieInfo = cookie.sizing.map((size, idx) => `${size} - $${cookie.pricing[idx]}`)
+  cupcakeInfo = cupcake.sizing.map((size, idx) => `${size} - $${cupcake.pricing[idx]}`)
+  nineInchInfo = nineInch.sizing.map((size, idx) => `${size} - $${nineInch.pricing[idx]}`)
 
-  sizesAndPrices.cookieInfo = cookie.sizing.map((size, idx) => `${size} - $${cookie.pricing[idx]}`)
-  sizesAndPrices.cupcakeInfo = cupcake.sizing.map((size, idx) => `${size} - $${cupcake.pricing[idx]}`)
-  sizesAndPrices.nineInchInfo = nineInch.sizing.map((size, idx) => `${size} - $${nineInch.pricing[idx]}`)
-
-  return sizesAndPrices
+  return { cookieInfo, cupcakeInfo, nineInchInfo }
 }
 
 module.exports = { getProducts, filterByProductType, getSizesAndPrices }

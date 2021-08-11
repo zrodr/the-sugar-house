@@ -1,11 +1,21 @@
-var itemCount = 1;
+let itemCount = 1;
 
 const orderList = document.querySelector('.item-list')
 const firstItem = orderList.querySelector('select[name="item"]')
+const firstAmount = orderList.querySelector('select[name="quantity"]')
 const addItem = document.getElementById('add-item')
 const removeItem = document.getElementById('remove-item')
 
-const addFormField = (e) => {
+
+/* adding event listeners */
+if (orderList && firstItem && addItem && removeItem) {
+  firstItem.onchange = getPricesForItem
+  addItem.onclick = addFormField
+  removeItem.onclick = removeFormField
+}
+
+
+function addFormField(e) {
   e.preventDefault()
 
   /* copy DOM subtrees for input fields. 'for' and 'name' attributes are appended
@@ -21,6 +31,8 @@ const addFormField = (e) => {
   newAmount.querySelector('label[for*="quantity"]').htmlFor = `quantity-${itemCount}`
   const amountSelect = newAmount.querySelector('select[name*="quantity"]')
   amountSelect.name = `quantity-${itemCount}`
+  /* TODO: set all elements to display:none when copying first select tag */
+  amountSelect.childNodes.forEach((child) => { child.style.display = 'none' })
 
   itemCount++;
 
@@ -28,9 +40,18 @@ const addFormField = (e) => {
   orderList.appendChild(newAmount)
 }
 
-const removeFormField = (e) => {
+function removeFormField(e) {
   e.preventDefault()
+
   if (itemCount === 1) return;
+
+  const removeNode = (node) => {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild)
+    }
+  
+    orderList.removeChild(node)
+  }
 
   const lastAmount = orderList.lastChild
   const lastItem = lastAmount.previousElementSibling
@@ -40,31 +61,33 @@ const removeFormField = (e) => {
   removeNode(lastAmount)
 }
 
-if (orderList && firstItem && addItem && removeItem) {
-  firstItem.onchange = getPricesForItem
-  addItem.onclick = addFormField
-  removeItem.onclick = removeFormField
-}
-
-
-/*  helper functions */
-function removeNode(node) {
-  while (node.firstChild) {
-    node.removeChild(node.firstChild)
-  }
-
-  orderList.removeChild(node)
-}
-
+/* called on item field once a selection is made */
 function getPricesForItem(e) {
   e.preventDefault()
 
-  const itemName = this.value
+  const filterPrices = (item) => {
+    const prices = nextAmount.querySelectorAll(`:not(option[class*="${item}"])`)
+    prices.forEach((price) => {
+      price.style.display = 'none'
+    })
+  }
+
   /* grabs the quantity field corresponding to the item select tag */
   const nextAmount = this.parentElement.nextElementSibling.querySelector('select[name*="quantity"]')
+  const allPrices = nextAmount.querySelectorAll('option[class*="prices"]')
+  const itemName = this.value
+
+  /* reset all fields before filtering them out again */
+  allPrices.forEach((price) => { price.style.display = 'block' })
+  nextAmount.selectedIndex = 0
 
   if (itemName.includes('Cookies')) {
-    console.log(nextAmount.options)
+    filterPrices('cookie')
   }
-  console.log(itemName)
+  else if (itemName.includes('Cupcakes')) {
+    filterPrices('cupcake')
+  }
+  else {
+    filterPrices('9-inch')
+  }
 }

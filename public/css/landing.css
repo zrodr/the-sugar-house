@@ -101,7 +101,8 @@ header {
 .nine-inch, 
 .cupcakes,
 .prices {
-  padding: 1rem 0.875rem
+  padding: 1rem 0.875rem;
+  justify-self: center;
 }
 
 .cookies {
@@ -146,6 +147,10 @@ header {
   border: none
 }
 
+#email-form button {
+  width: 80%
+}
+
 footer {
   height: 200px
 }
@@ -167,7 +172,8 @@ footer .svg-link {
   }
 
   .menu {
-    width: 65vw
+    width: 75vw;
+    max-width: 1300px
   }
 
   .menu-content {

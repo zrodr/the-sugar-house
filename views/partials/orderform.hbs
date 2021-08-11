@@ -18,10 +18,18 @@
     <div class="quantity form-group">
       <label for="quantity">Amount:</label>
       <select name="quantity" required>
-        <option hidden disabled selected value>1000 :)</option>
-        <option value="1">1</option>
+        <option hidden disabled selected value>Select a size...</option>
+        {{#each cupcakePricing}}
+          <option style="display:none;" class="cupcake-prices" value="{{this}}">{{this}}</option>
+        {{/each}}
         
-        
+        {{#each cookiePricing}}
+          <option style="display:none;" class="cookie-prices" value="{{this}}">{{this}}</option>
+        {{/each}}
+
+        {{#each nineInchPricing}}
+          <option style="display:none;" class="9-inch-prices" value="{{this}}">{{this}}</option>
+        {{/each}}
       </select>
     </div>
 

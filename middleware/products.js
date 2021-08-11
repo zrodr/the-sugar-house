@@ -35,17 +35,27 @@ const processPricing = (req, res, next) => {
 
 const filterForMenu = (req, res, next) => {
   try {
-    const {cookies,cupcakes,nineInch} = filterByProductType(res.locals.products)
+    const { cookies, cupcakes, nineInch } = filterByProductType(res.locals.products)
 
     res.locals.cookies = cookies
     res.locals.cupcakes = cupcakes
     res.locals.nineInch = nineInch
 
+    /* filter out menu sizes greater than 12, since rates are by the dozen */
+    const gtDozen = (pricing) => {
+      const amount = pricing.split(' ')[0]
+      return !(parseInt(amount, 10) >= 12)
+    }
 
+    res.locals.cookiePricing = res.locals.cookiePricing.filter(gtDozen)
+    res.locals.cupcakePricing = res.locals.cupcakePricing.filter(gtDozen)
+
+    /* Unneeded for menu display */
+    res.locals.nineInchPricing = null
     /* clean up after original db query data. Avoids storing full list and 
        sub-arrays at the same time. */
     res.locals.products = null
-    
+
     next()
   }
   catch (err) {
