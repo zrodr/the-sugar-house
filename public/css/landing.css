@@ -12,7 +12,23 @@ header {
   width: 100%;
   background-color: #7a1f48;
   text-align: center;
-  
+  margin-bottom: 10rem;
+}
+
+header::after {
+  content:"";
+  position: absolute;
+  top: 100vh;
+  background-color: #7a1f48;
+  height: 70px;
+  width: 100%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+header .btn-outline {
+  color: #ffc1d6;
+  border: 3px solid #ffc1d6;
 }
 
 .logo {
@@ -100,9 +116,11 @@ header {
 .cookies, 
 .nine-inch, 
 .cupcakes,
-.prices {
-  padding: 1rem 0.875rem;
+.prices,
+.payment {
+  padding: 1rem 0;
   justify-self: center;
+  width: fit-content;
 }
 
 .cookies {
@@ -127,7 +145,7 @@ header {
 
 .payment {
   grid-area: payment;
-  padding-top: 4rem;
+  padding: 4rem 0;
 }
 
 .order {

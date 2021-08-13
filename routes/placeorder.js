@@ -7,7 +7,7 @@ router.post('/', (req, res, next) => {
   // TODO: finish with processing the body and making email readable
   
   try {
-    //sendEmailNotification()
+    //await sendEmailNotification(from, subject, body)
     res.status(200).redirect('/')
   }
   catch(err) {

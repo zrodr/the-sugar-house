@@ -60,7 +60,7 @@ textarea {
   padding: 2rem;
 
   border-radius: 7px;
-  box-shadow: 5px 5px 5px #333
+  box-shadow: 0 0 8px #333
 }
 
 .form-group {
@@ -95,7 +95,7 @@ input:focus, select:focus {
   letter-spacing: 2px;
   font-weight:500;
   cursor: pointer;
-  color: #ffc1d6;
+  color: white;
   background-color: #7a1f48; 
   border: 2px solid #7a1f48;
   border-radius: 10px;
@@ -103,9 +103,9 @@ input:focus, select:focus {
 }
 
 .btn-outline {
-  color: #ffc1d6;
+  color: white;
   background: none;
-  border: 3px solid #ffc1d6
+  border: 3px solid white
 }
 
 .btn:hover {

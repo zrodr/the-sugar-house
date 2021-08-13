@@ -31,8 +31,10 @@ function addFormField(e) {
   newAmount.querySelector('label[for*="quantity"]').htmlFor = `quantity-${itemCount}`
   const amountSelect = newAmount.querySelector('select[name*="quantity"]')
   amountSelect.name = `quantity-${itemCount}`
-  /* TODO: set all elements to display:none when copying first select tag */
-  amountSelect.childNodes.forEach((child) => { child.style.display = 'none' })
+  /* set all options to invisible when spawning new quantity select */
+  amountSelect.querySelectorAll('option[style*="block"]').forEach((option) => { 
+    option.style.display = 'none' 
+  })
 
   itemCount++;
 
