@@ -43,6 +43,7 @@ const filterForMenu = (req, res, next) => {
 
     /* filter out menu sizes greater than 12, since rates are by the dozen */
     const gtDozen = (pricing) => {
+      /* grab index corresponding to item quantity */
       const amount = pricing.split(' ')[0]
       return !(parseInt(amount, 10) >= 12)
     }
