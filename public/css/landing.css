@@ -47,8 +47,8 @@ header .btn-outline {
 
 .menu-link, .order-link {
   width: 200px;
-  justify-self: center;
   align-self: center;
+  justify-self: center;
   margin-bottom: auto;
   padding: 1rem;
 }
@@ -85,7 +85,6 @@ header .btn-outline {
 .menu h3 {
   font-weight:700;
   font-size: 30px;
-  margin-bottom: 2rem;
 }
 
 .menu-title {
@@ -93,7 +92,7 @@ header .btn-outline {
 }
 
 .menu-list li {
-  margin-top: 1rem
+  margin-top: 2rem
 }
 
 .menu p {
@@ -102,15 +101,16 @@ header .btn-outline {
 
 .menu-content {
   display: grid;
-  justify-content: center;
+  justify-items: stretch;
+  align-items: stretch;
   gap: 2rem;
   font-family:'Shadows Into Light', cursive;
   font-weight: 500;
   grid-template-areas: 
   "cookies cupcakes prices"
-  "cookies payment prices"
-  "nine-inch payment prices"
-  "nine-inch payment prices";
+  "cookies cupcakes prices"
+  "nine-inch cupcakes prices"
+  "nine-inch cupcakes prices";
   height: auto
 }
 
@@ -122,11 +122,9 @@ header .btn-outline {
 .cookies, 
 .nine-inch, 
 .cupcakes,
-.prices,
-.payment {
+.prices{
   padding: 1rem 0;
   justify-self: center;
-  width: fit-content;
 }
 
 .cookies {
@@ -143,15 +141,6 @@ header .btn-outline {
 
 .prices {
   grid-area: prices
-}
-
-.prices .menu-heading {
-  margin-top: 3rem
-}
-
-.payment {
-  grid-area: payment;
-  padding: 4rem 0;
 }
 
 .order::before {
@@ -182,10 +171,11 @@ header .btn-outline {
 }
 
 aside .btn {
-  margin: 3rem 0;
   align-self: center;
-  /* padding: 1rem 2rem; */
-  width: 70%
+  margin: 3rem 0;
+  min-width: 250px;
+  width: 80%;
+  white-space: nowrap;
 }
 
 aside h4 {
@@ -194,7 +184,7 @@ aside h4 {
   text-align: left;
 }
 
-.order-content form { margin: 0} 
+.order-content form { margin: 0 } 
 .order-content {
   display: flex;
   flex-direction: row;
@@ -214,7 +204,7 @@ aside h4 {
 }
 
 #email-form button {
-  width: 80%
+  width: 80%;
 }
 
 footer {
@@ -287,7 +277,6 @@ footer ul {
     "cookies"
     "nine-inch"
     "cupcakes"
-    "payment"
     "prices";
     gap: 0;
     row-gap: 1rem;
@@ -300,8 +289,7 @@ footer ul {
   .cookies, 
   .nine-inch, 
   .cupcakes,
-  .prices,
-  .payment {
+  .prices {
     padding: 1.5rem 1rem
   }
 }
