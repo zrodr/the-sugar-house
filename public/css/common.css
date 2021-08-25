@@ -66,7 +66,6 @@ textarea {
 .form-group {
   font-size: 16px;
   margin: 0.5rem 0;
-  /* border-bottom: 1px solid #555; */
 }
 
 .form-group input,
@@ -118,8 +117,8 @@ input:focus, select:focus, textarea:focus {
 
 .btn-outline:hover {
   background-color:white;
-  color: #7a1f48;
-  border: 3px solid #7a1f48;
+  color: var(--primary);
+  border: 3px solid var(--primary);
   transition: color 0.5s, background-color 0.5s
 }
 

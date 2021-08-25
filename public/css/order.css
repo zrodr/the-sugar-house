@@ -24,8 +24,8 @@
 .item-list {
   padding: 2rem 0;
   display: grid;
-  grid-template-areas:
-  "item quantity";
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
   gap: 1rem
 }
 
@@ -58,9 +58,8 @@
   }
 
   .item-list {
-    grid-template-areas:
-    "item"
-    "quantity";
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
     row-gap: 1rem
   }
 }
