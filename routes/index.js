@@ -4,7 +4,7 @@ const { filterForMenu, getProductList, processPricing } = require('../middleware
 router.use(getProductList, processPricing)
 
 router.get('/', filterForMenu, (req, res) => {
-  res.render('landing', { cssPath: "/css/landing.css", jsPath: "" })
+  res.render('landing', { cssPath: "/css/landing.css"})
 })
 
 router.get('/order', (req, res) => {

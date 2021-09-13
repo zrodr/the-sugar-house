@@ -30,15 +30,15 @@ app.engine(
     layoutsDir: path.join(__dirname, '/views/layouts'),
     partialsDir: path.join(__dirname, '/views/partials')
   })
-  )
-  
-  app.use('/', indexRouter)
-  app.use('/order', orderRouter)
-  app.use((err, req, res, next) => {
-    res.status(500).render('error', { message: err.message })
-  })
-  
-  const port = process.env.PORT
-  app.listen(port, () => {
+)
+
+app.use('/', indexRouter)
+app.use('/order', orderRouter)
+app.use((err, req, res, next) => {
+  res.status(500).render('error', { message: err.message })
+})
+
+const port = process.env.PORT
+app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
