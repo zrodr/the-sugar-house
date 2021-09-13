@@ -3,18 +3,22 @@ const path = require('path')
 const express = require('express')
 const helmet = require('helmet')
 const exphbs = require('express-handlebars')
+const session = require('express-session')
 const connectToDB = require('./config/db')
 
 require('dotenv').config()
 
 connectToDB()
 
-const indexRouter = require('./routes/index')
-const orderRouter = require('./routes/placeorder')
-
 const app = express()
 
+if(app.get('env') === 'production') {
+  app.set('trust proxy', 1) // for planned nginx reverse proxy
+  //session.cookie.secure = true
+}
+
 /* allows express to serve static files from a specified directory */
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: false }))
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
@@ -32,8 +36,9 @@ app.engine(
   })
 )
 
-app.use('/', indexRouter)
-app.use('/order', orderRouter)
+/* mounting routes */
+app.use('/', require('./routes/index'))
+app.use('/order', require('./routes/placeorder'))
 app.use((err, req, res, next) => {
   res.status(500).render('error', { message: err.message })
 })

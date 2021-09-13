@@ -1,31 +1,44 @@
 const router = require('express').Router()
+const { body, validationResult } = require('express-validator')
+
 const { formatEmail, sendEmailNotification } = require('../helpers/email')
-const { validateFields } = require('../helpers/validation')
 
-router.post('/', async (req, res, next) => {
-  const orderContent = Object.values(req.body)
-  console.log(orderContent)
+router.post('/', [
+  body('from', 'Email must be valid!').isEmail(),
+  body('item', 'Please select an item!').exists({ checkFalsy: true }),
+  body('quantity', 'Please select an amount!').exists({ checkFalsy: true }),
+], async (req, res, next) => {
+  const errors = validationResult(req).array()
 
-  if (!validateFields(orderContent)) {
-    res.redirect('/order')
+  if (errors.length) {
+    req.session.errors = errors
+    return res.redirect('/order')
   }
-  else {
-    console.log(req.body)
-    const { from, subject, body } = formatEmail(orderContent)
 
-    try {
-      await sendEmailNotification(from, subject, body, false)
-      console.log(from, subject, body)
-      res.status(200).redirect('/')
-    }
-    catch (err) {
-      next(err)
-    }
+  const orderContent = Object.values(req.body)
+  const { from, subject, body } = formatEmail(orderContent)
+
+  try {
+    await sendEmailNotification(from, subject, body, false)
+    console.log(errors)
+    res.status(200).redirect('/')
+  }
+  catch (err) {
+    next(err)
   }
 })
 
-router.post('/custom', async (req, res, next) => {
-  const { from, subject, body } = req.body
+router.post('/custom', [
+  body('from', 'Must provide a valid email!').isEmail(),
+  body('subject', 'Fields cannot be blank!').exists({ checkFalsy: true }),
+  body('body', 'Fields cannot be blank!').exists({ checkFalsy: true }),
+], async (req, res, next) => {
+  const errors = validationResult(req).array()
+
+  if (errors.length) {
+    req.session.errors = errors
+    return res.redirect('/#email-form')
+  }
 
   try {
     await sendEmailNotification(from, subject, body, true)

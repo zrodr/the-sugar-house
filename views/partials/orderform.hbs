@@ -1,16 +1,19 @@
 <form class="form" id="order-form" action="/order" method="POST" enctype="application/x-www-form-urlencoded">
+  {{> error-msg }}
+
   <div class="email form-group">
     <label for="email">Email:</label>
-    <input type="email" name="email" required placeholder="Your Email">
+    <input type="email" name="email" placeholder="Your Email" required>
   </div>
 
   <div class="item-list">
 
     <div class="item form-group">
-      <label for="item">Item:</label><select name="item" required>
-        <option hidden disabled selected value>Select an item</option>     
+      <label for="item">Item:</label>
+      <select name="item" required>
+        <option hidden disabled selected value>Select an item</option>
         {{#each products}}
-          <option value="{{this.name}} {{this.type}}">{{this.name}} {{this.type}}</option>
+        <option value="{{this.name}} {{this.type}}">{{this.name}} {{this.type}}</option>
         {{/each}}
       </select>
     </div>
@@ -20,15 +23,15 @@
       <select name="quantity" required>
         <option hidden disabled selected value>Select a size...</option>
         {{#each cupcakePricing}}
-          <option style="display:none;" class="cupcake-prices" value="{{this}}">{{this}}</option>
+        <option style="display:none;" class="cupcake-prices" value="{{this}}">{{this}}</option>
         {{/each}}
-        
+
         {{#each cookiePricing}}
-          <option style="display:none;" class="cookie-prices" value="{{this}}">{{this}}</option>
+        <option style="display:none;" class="cookie-prices" value="{{this}}">{{this}}</option>
         {{/each}}
 
         {{#each nineInchPricing}}
-          <option style="display:none;" class="9-inch-prices" value="{{this}}">{{this}}</option>
+        <option style="display:none;" class="9-inch-prices" value="{{this}}">{{this}}</option>
         {{/each}}
       </select>
     </div>

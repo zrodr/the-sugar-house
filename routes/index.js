@@ -4,11 +4,15 @@ const { filterForMenu, getProductList, processPricing } = require('../middleware
 router.use(getProductList, processPricing)
 
 router.get('/', filterForMenu, (req, res) => {
-  res.render('landing', { cssPath: "/css/landing.css"})
+  const errors = req.session.errors
+  req.session.errors = null
+  res.render('landing', { cssPath: "/css/landing.css", errors })
 })
 
 router.get('/order', (req, res) => {
-  res.render('order', { cssPath: "/css/order.css", jsPath: "/js/order.js" })
+  const errors = req.session.errors
+  req.session.errors = null
+  res.render('order', { cssPath: "/css/order.css", jsPath: "/js/order.js", errors })
 })
 
 module.exports = router
