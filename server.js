@@ -6,7 +6,6 @@ const exphbs = require('express-handlebars')
 const connectToDB = require('./config/db')
 
 require('dotenv').config()
-const port = process.env.PORT
 
 connectToDB()
 
@@ -14,6 +13,7 @@ const indexRouter = require('./routes/index')
 const orderRouter = require('./routes/placeorder')
 
 const app = express()
+
 /* allows express to serve static files from a specified directory */
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
@@ -30,15 +30,15 @@ app.engine(
     layoutsDir: path.join(__dirname, '/views/layouts'),
     partialsDir: path.join(__dirname, '/views/partials')
   })
-)
-
-app.use('/', indexRouter)
-app.use('/order', orderRouter)
-app.use((err, req, res, next) => {
-  //console.log(err)
-  res.status(500).render('error', { message: err.message })
-})
-
-app.listen(port, () => {
+  )
+  
+  app.use('/', indexRouter)
+  app.use('/order', orderRouter)
+  app.use((err, req, res, next) => {
+    res.status(500).render('error', { message: err.message })
+  })
+  
+  const port = process.env.PORT
+  app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })

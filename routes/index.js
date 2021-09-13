@@ -11,8 +11,4 @@ router.get('/order', (req, res) => {
   res.render('order', { cssPath: "/css/order.css", jsPath: "/js/order.js" })
 })
 
-/* router.get('/error', (req, res) => {
-  res.render('error', { message: "test" })
-}) */
-
 module.exports = router

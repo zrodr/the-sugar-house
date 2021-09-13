@@ -1,8 +1,7 @@
 const Product = require('../models/Product')
 
-const valid = (productList) => (!(productList === undefined || productList.length == 0))
-
 const getProducts = async () => {
+  const valid = (productList) => (!(productList === undefined || productList.length == 0))
   const products = await Product.find({}).sort({ type: -1 }).lean()
 
   if (!valid(products)) throw new Error('Could not fetch products from DB')

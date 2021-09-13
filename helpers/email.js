@@ -1,34 +1,45 @@
 const nodemailer = require('nodemailer')
-const { google } = require('googleapis')
+
+const formatEmail = (fields) => {
+  const from = fields[0] //email field
+  let subject = 'Order: www.tsh.com'
+  let body = ''
+
+  for (let i = 1; i < fields.length; i += 2) {
+    const item = fields[i].concat(' ', fields[i + 1], '\n')
+    body = body.concat(item)
+  }
+
+  return { from, subject, body }
+}
 
 
-const sendEmailNotification = async (from, subject, text) => {
-  const OAuth2Client = new google.auth.OAuth2(process.env.OAUTH_CLIENT, process.env.OAUTH_SECRET, process.env.OAUTH_REDIRECT)
-  OAuth2Client.setCredentials({ refresh_token: process.env.OAUTH_REFRESH })
-  
-  const accessToken = OAuth2Client.getAccessToken()
-
+const sendEmailNotification = async (sender, subject, text, custom) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    name: '127.0.0.1',
+    host: 'smtp-mail.outlook.com',
+    port: 587,
+    secureConnection: false,
+    tls: {
+      ciphers: 'SSLv3'
+    },
     auth: {
-      type: 'OAuth2',
       user: process.env.TSH_ORDER_EMAIL,
-      clientId: process.env.OAUTH_CLIENT,
-      clientSecret: process.env.OAUTH_SECRET,
-      refreshToken: process.env.OAUTH_REFRESH,
-      accessToken
+      pass: process.env.TSH_ORDER_PASS
     }
   })
 
+  const orderType = (custom ? 'Custom order \n\n' : 'Order \n\n')
+
   const mailOptions = {
+    from: 'tsh-order@outlook.com',
     to: process.env.TSH_EMAIL,
     subject,
-    text: 'Order from: '.concat(from, '\n', text)
+    text: orderType.concat('Customer contact: '.concat(sender), '\n\n', text)
   }
 
   try {
-    const result = await transporter.sendMail(mailOptions)
-    console.log('Sent mail!:', result)
+    await transporter.sendMail(mailOptions)
   }
   catch (err) {
     throw new Error(err)
@@ -38,4 +49,4 @@ const sendEmailNotification = async (from, subject, text) => {
   }
 }
 
-module.exports = { sendEmailNotification }
+module.exports = { formatEmail, sendEmailNotification }
