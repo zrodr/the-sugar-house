@@ -3,14 +3,14 @@
 
   <div class="email form-group">
     <label for="email">Email:</label>
-    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="email" name="email" placeholder="Your email here">
   </div>
 
   <div class="item-list">
 
     <div class="item form-group">
       <label for="item">Item:</label>
-      <select name="item" required>
+      <select name="item">
         <option hidden disabled selected value>Select an item</option>
         {{#each products}}
         <option value="{{this.name}} {{this.type}}">{{this.name}} {{this.type}}</option>
@@ -20,7 +20,7 @@
 
     <div class="quantity form-group">
       <label for="quantity">Amount:</label>
-      <select name="quantity" required>
+      <select name="quantity">
         <option hidden disabled selected value>Select a size...</option>
         {{#each cupcakePricing}}
         <option style="display:none;" class="cupcake-prices" value="{{this}}">{{this}}</option>
