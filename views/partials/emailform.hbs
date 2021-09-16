@@ -4,17 +4,20 @@
 
   <div class="form-group">
     <label for="from">From:</label>
-    <input name="from" type="email" placeholder="Your email here">
+    <input name="from" type="email" placeholder="Your email here" value={{formVals.from}}>
   </div>
 
   <div class="form-group">
     <label for="subject">Subject:</label>
-    <input name="subject" type="text" placeholder="Subject">
+    <input name="subject" type="text" placeholder="Subject" value={{formVals.subject}}>
   </div>
 
   <div class="form-group">
     <label for="body">Body:</label>
-    <textarea name="body" id="email-body" cols="30" rows="5" placeholder="What did you have in mind?"></textarea>
+    <textarea name="body" 
+      id="email-body" 
+      cols="30" rows="5" 
+      placeholder="What did you have in mind?">{{formVals.body}}</textarea>
   </div>
 
   <button class="btn" type="submit">Send</button>

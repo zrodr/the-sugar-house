@@ -27,12 +27,11 @@ function addFormField(e) {
   const itemSelect = newItem.querySelector('select[name*="item"]')
   itemSelect.name = `item-${itemCount}`
   itemSelect.onchange = getPricesForItem
-  itemSelect.required = true
 
   newAmount.querySelector('label[for*="quantity"]').htmlFor = `quantity-${itemCount}`
   const amountSelect = newAmount.querySelector('select[name*="quantity"]')
   amountSelect.name = `quantity-${itemCount}`
-  amountSelect.required = true
+  
   /* set all options to invisible when spawning new quantity select */
   amountSelect.querySelectorAll('option[style*="block"]').forEach((option) => { 
     option.style.display = 'none' 
