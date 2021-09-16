@@ -20,4 +20,8 @@ router.get('/order', (req, res) => {
   res.render('order', { cssPath: "/css/order.css", jsPath: "/js/order.js", errors })
 })
 
+router.get('/error', (req, res) => {
+  res.render('error', { cssPath: "/css/error.css", message: 'Testing styles' })
+})
+
 module.exports = router

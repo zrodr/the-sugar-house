@@ -8,7 +8,7 @@ const connectToDB = require('./config/db')
 
 require('dotenv').config()
 
-connectToDB()
+const connection = connectToDB()
 
 const app = express()
 
@@ -37,10 +37,11 @@ app.engine(
 )
 
 /* mounting routes */
+app.use(connection)
 app.use('/', require('./routes/index'))
 app.use('/order', require('./routes/placeorder'))
 app.use((err, req, res, next) => {
-  res.status(500).render('error', { message: err.message })
+  res.status(500).render('error', { cssPath: "/css/error.css", message: err.message })
 })
 
 const port = process.env.PORT
