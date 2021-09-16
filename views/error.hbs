@@ -1,7 +1,11 @@
 <main>
   <div class="error-container">
     <p>Oops! An error occurred!</p>
-    <p>{{message}}</p>
+    <div class="message">
+      <h1 class="err-code">{{code}}</h1>
+      <h3 class="err-msg">{{message}}</h3>
+    </div>
+
     <a href="/" class="btn"> Back to safety </a>
   </div>
 </main>

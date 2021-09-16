@@ -5,8 +5,24 @@ main {
 }
 
 .error-container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content:space-around;
   align-items: center
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--primary);
+  /* flex-wrap: wrap; */
+}
+
+.err-code,
+.err-msg {
+  color: white;
+  align-self: baseline;
+  height: 30vh; width: 100%
 }

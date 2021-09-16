@@ -43,12 +43,20 @@ app.use('/order', require('./routes/placeorder'))
 
 /* For errors thrown from routes */
 app.use((err, req, res, next) => {
-  res.status(500).render('error', { cssPath: "/css/error.css", message: err.message })
+  res.status(500).render('error', { 
+    cssPath: "/css/error.css", 
+    message: err.message,
+    code: 500 
+  })
 })
 
 /* Not found errors */
 app.use((req, res, next) => {
-  res.status(404).render('error', { cssPath: "/css/error.css", message: "Page not found." })  
+  res.status(404).render('error', {
+    cssPath: "/css/error.css", 
+    message: "Page not found.",
+    code: 404 
+  })  
 })
 
 const port = process.env.PORT
