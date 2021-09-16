@@ -40,8 +40,15 @@ app.engine(
 app.use(connection)
 app.use('/', require('./routes/index'))
 app.use('/order', require('./routes/placeorder'))
+
+/* For errors thrown from routes */
 app.use((err, req, res, next) => {
   res.status(500).render('error', { cssPath: "/css/error.css", message: err.message })
+})
+
+/* Not found errors */
+app.use((req, res, next) => {
+  res.status(404).render('error', { cssPath: "/css/error.css", message: "Page not found." })  
 })
 
 const port = process.env.PORT
