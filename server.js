@@ -4,6 +4,7 @@ const express = require('express')
 const helmet = require('helmet')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const connectToDB = require('./config/db')
 
 require('dotenv').config()
@@ -17,8 +18,23 @@ if(app.get('env') === 'production') {
   //session.cookie.secure = true
 }
 
+app.use(session({
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI_ATLAS,
+    mongoOptions: {
+      useUnifiedTopology: true
+    },
+    autoRemove: 'interval',
+    autoRemoveInterval: 1 // 1 minute 
+  }),
+  secret: process.env.SECRET,
+  resave: false, 
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 45 //45 seconds
+  }
+}))
 /* allows express to serve static files from a specified directory */
-app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: false }))
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
