@@ -1,11 +1,18 @@
 <main>
   <div class="error-container">
-    <p>Oops! An error occurred!</p>
+    <h1>Oops! An error occurred!</h1>
+    <img src="/photos/error-img.png" alt="Dropped ice cream cone">
     <div class="message">
       <h1 class="err-code">{{code}}</h1>
       <h3 class="err-msg">{{message}}</h3>
     </div>
-
-    <a href="/" class="btn"> Back to safety </a>
+    <div class="home-link">
+      <a href="/" class="btn btn-outline"> Back to safety </a>
+    </div>
   </div>
+
+
+
+  {{> footer }}
+
 </main>

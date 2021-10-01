@@ -144,3 +144,34 @@ input:focus, select:focus, textarea:focus {
   background-color: #f1a5ab;
   color: #5f171e
 }
+
+footer {
+  height: auto;
+  padding: 2rem;
+  background-color: var(--bg-light-grey);
+  color: #555
+}
+
+footer ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
+  row-gap: 1.25rem;
+}
+
+footer li{
+  position: relative
+}
+
+footer img {
+  width: 24px; height:24px;
+  object-fit:fill;
+}
+
+footer p {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 2.5rem
+}

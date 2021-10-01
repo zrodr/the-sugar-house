@@ -18,6 +18,8 @@ if (orderList && firstItem && addItem && removeItem) {
 function addFormField(e) {
   e.preventDefault()
 
+  if(itemCount >= 10) return
+
   /* copy DOM subtrees for input fields. 'for' and 'name' attributes are appended
      with a numeric constant to maintain uniqueness */
   const newItem = orderList.firstElementChild.cloneNode(true)
