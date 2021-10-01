@@ -35,12 +35,4 @@ router.get('/order', (req, res) => {
   })
 })
 
-router.get('/error', (req, res) => {
-  res.render('error', {
-    cssPath: "/css/error.css",
-    message: 'Testing styles and I need a slightly linger message for testing',
-    code: 420
-  })
-})
-
 module.exports = router

@@ -18,7 +18,7 @@ if(app.get('env') === 'production') {
 }
 
 /* allows express to serve static files from a specified directory */
-app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: false }))
+app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: false }))
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
@@ -60,6 +60,4 @@ app.use((req, res, next) => {
 })
 
 const port = process.env.PORT
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
-})
+app.listen(port)

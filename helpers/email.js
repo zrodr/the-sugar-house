@@ -16,7 +16,7 @@ const formatEmail = (fields) => {
 
 const sendEmailNotification = async (sender, subject, text, custom) => {
   const transporter = nodemailer.createTransport({
-    name: '127.0.0.1',
+    name: process.env.OUTLOOK_ORIGIN,
     host: 'smtp-mail.outlook.com',
     port: 587,
     secureConnection: false,
@@ -32,7 +32,7 @@ const sendEmailNotification = async (sender, subject, text, custom) => {
   const orderType = (custom ? 'Custom order \n\n' : 'Order \n\n')
 
   const mailOptions = {
-    from: 'tsh-order@outlook.com',
+    from: process.env.TSH_ORDER_EMAIL,
     to: process.env.TSH_EMAIL,
     subject,
     text: orderType.concat('Customer contact: '.concat(sender), '\n\n', text)

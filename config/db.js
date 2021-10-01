@@ -6,8 +6,7 @@ const connectToDB = () => {
   return function(req, res, next) { // return middleware for elegant error handling
     if (!connected) {
       connected = true
-      const URI = process.env.MONGO_LOCAL
-      //const URI = process.env.MONGO_URI_ATLAS
+      const URI = process.env.MONGO_URI_ATLAS
   
       mongoose.connect(URI, {
         useNewUrlParser: true,
@@ -21,9 +20,7 @@ const connectToDB = () => {
   
       const db = mongoose.connection
   
-      db.once('open', () => {
-        console.log('Connected to db...')
-      })
+      db.once('open', () => { })
     }
     next()
   }
